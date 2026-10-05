@@ -1,0 +1,112 @@
+@import "tailwindcss";
+
+/*
+ * Paleta tomada del portafolio y del uniforme de la doctora:
+ * porcelana (fondo), rubor (paneles), arena (bordes), malva (acciones),
+ * cacao (títulos). Para cambiar un color, cámbialo solo aquí.
+ */
+@theme {
+  --color-porcelana: #fbf8f6;
+  --color-rubor: #f2e9e6;
+  --color-rubor-2: #ead9d6;
+  --color-arena: #e3d3c9;
+  --color-nude: #b89279;
+  --color-malva: #7a5468;
+  --color-malva-oscuro: #5f3f51;
+  --color-malva-claro: #d8c2cc;
+  --color-cacao: #3a2924;
+  --color-tinta: #54433d;
+
+  --font-sans: "Poppins", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Cormorant Garamond", Georgia, serif;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-porcelana);
+  color: var(--color-tinta);
+  font-family: var(--font-sans);
+  font-weight: 300;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--color-malva-claro);
+  color: var(--color-cacao);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-malva);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+/* Líneas del arco de la portada: se dibujan una sola vez al cargar */
+.arco-linea {
+  stroke-dasharray: 1600;
+  stroke-dashoffset: 1600;
+  animation: dibujar 2.4s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+}
+@keyframes dibujar {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.aparece {
+  animation: aparece 0.9s 0.25s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+@keyframes aparece {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+}
+
+/* Aviso al agregar o quitar de la lista */
+.aviso {
+  animation: aviso 0.35s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+@keyframes aviso {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 10px);
+  }
+}
+
+.contador-salta {
+  animation: salta 0.4s ease;
+}
+@keyframes salta {
+  40% {
+    transform: scale(1.35);
+  }
+}
+
+/* Barra de categorías con scroll horizontal sin barra visible */
+.sin-barra {
+  scrollbar-width: none;
+}
+.sin-barra::-webkit-scrollbar {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .arco-linea {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+  .aparece,
+  .aviso,
+  .contador-salta {
+    animation: none;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
